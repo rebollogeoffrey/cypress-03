@@ -1,6 +1,6 @@
 describe('Create User for Cypress 03', () => {
 
-    let user = require('../fixtures/userData')
+    let user = require('../../fixtures/userData.json')
 
     it(user.name, () => {
         cy.visit('https://practice.expandtesting.com/notes/api/api-docs/')
@@ -32,14 +32,12 @@ describe('Create User for Cypress 03', () => {
             })
 
             // Send Info
-            cy.get(".excecute").click()
+            cy.get(".execute").click()
 
             // Verify FeedBack for Positive Response
             return cy.get(".live-responses-table").within(($liveResponses) => {
                 return cy.get(".response-col_status").contains("201")
             })
-
         })
-
     })
 })
