@@ -1,5 +1,8 @@
 describe('Create User for Cypress 03', () => {
-    it('Gérard Bouchard', () => {
+
+    let user = require('../fixtures/userData')
+
+    it(user.name, () => {
         cy.visit('https://practice.expandtesting.com/notes/api/api-docs/')
 
         // Click on the post User to create a User
@@ -11,21 +14,21 @@ describe('Create User for Cypress 03', () => {
             cy.get('.try-out__btn').click()
 
             // Fill Name
-            cy.get('[placeholder=name]').type('Gérard')
+            cy.get('[placeholder=name]').type(user.name)
             cy.get('[placeholder=name]').then(actualValue => {
-                expect(actualValue).to.have.value('Gérard')
+                expect(actualValue).to.have.value(user.name)
             })
 
             // Fill Email
-            cy.get('[placeholder=email]').type('b.gerard@gmail.com')
+            cy.get('[placeholder=email]').type(user.email)
             cy.get('[placeholder=email]').then(actualValue => {
-                expect(actualValue).to.have.value('b.gerard@gmail.com')
+                expect(actualValue).to.have.value(user.email)
             })
 
             // Fill Password
-            cy.get('[placeholder=password]').type('M0t2Passe')
+            cy.get('[placeholder=password]').type(user.password)
             cy.get('[placeholder=password]').then(actualValue => {
-                expect(actualValue).to.have.value('M0t2Passe')
+                expect(actualValue).to.have.value(user.password)
             })
 
             // Send Info
@@ -37,31 +40,6 @@ describe('Create User for Cypress 03', () => {
             })
 
         })
-
-
-        //  Verify that the value has been updated
-        cy.get('[placeholder=name]').then(actualValue => {
-            expect(actualValue).to.have.value('Bouchard')
-        })
-
-        // Get an input, type into it
-        cy.get('#signup-email').type('bouchard.gersssard@hotmail.com')
-        //  Verify that the value has been updated
-        cy.get('input[id="signup-email"]').then(actualValue => {
-            expect(actualValue).to.have.value('bouchard.gersssard@hotmail.com')
-        })
-
-        // Get an input, type into it
-        cy.get('#signup-password').type('1Sacrémotdepassevraimentlongmaispascompliqué')
-        //  Verify that the value has been updated
-        cy.get('input[id="signup-password"]').then(actualValue => {
-            expect(actualValue).to.have.value('1Sacrémotdepassevraimentlongmaispascompliqué')
-        })
-
-        // Register
-        cy.get('[data-qa=signup-submit-button]').click()
-        // Vérify the URL after click
-        cy.url().should('include', '/dashboard')
 
     })
 })
